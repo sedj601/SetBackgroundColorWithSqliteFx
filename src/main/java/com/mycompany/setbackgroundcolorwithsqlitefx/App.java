@@ -35,6 +35,7 @@ public class App extends Application {
         colorPicker.setValue(Utility.DecodeColor(properties.get("BACKGROUND_COLOR")));//Set initial ColorPicker color.
         
         VBox vBox = new VBox(checkBox, colorPicker);
+        vBox.setSpacing(5);
         vBox.setAlignment(Pos.CENTER);
         
         StackPane root = new StackPane(vBox);       
