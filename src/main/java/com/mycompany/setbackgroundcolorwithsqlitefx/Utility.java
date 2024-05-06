@@ -17,14 +17,10 @@ import javafx.scene.paint.Color;
 public class Utility {
     public static String EncodeColor(Color color)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        
-        stringBuilder.append("R:").append((int)(color.getRed() * 225)).append("_");
-        stringBuilder.append("G:").append((int)(color.getGreen() * 225)).append("_");
-        stringBuilder.append("B:").append((int)(color.getBlue() * 225)).append("_");
-        stringBuilder.append("O:").append(color.getOpacity());
-                    
-        return stringBuilder.toString();
+        return String.format( "#%02X%02X%02X",
+            (int)( color.getRed() * 255 ),
+            (int)( color.getGreen() * 255 ),
+            (int)( color.getBlue() * 255 ) );
     }
     
     public static Color DecodeColor(String input)
@@ -34,14 +30,6 @@ public class Utility {
             return Color.WHITE;
         }
         
-        Map<String, Double> inputMap = new HashMap();
-        
-        List<String> inputList = Arrays.asList(input.split("_"));
-        inputList.stream().forEach((t) -> {
-            inputMap.put(t.split(":")[0], Double.valueOf(t.split(":")[1]));
-        });
-        
-        System.out.println(inputMap.get("R") + " " + inputMap.get("G") + " " + inputMap.get("B") + " " + inputMap.get("O"));
-        return Color.rgb(inputMap.get("R").intValue(), inputMap.get("G").intValue(), inputMap.get("B").intValue(), inputMap.get("O"));
+        return Color.web(input);
     }
 }
